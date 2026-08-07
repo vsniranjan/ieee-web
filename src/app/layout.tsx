@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Anton, Archivo } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { PageTerrain } from "@/components/chrome/PageTerrain";
 import { Reticle } from "@/components/chrome/Reticle";
+import { SmoothScroll } from "@/components/chrome/SmoothScroll";
 import { ThemeScript } from "@/components/chrome/ThemeScript";
-import { ThemeToggle } from "@/components/chrome/ThemeToggle";
 import "./globals.css";
 
 /**
@@ -40,19 +41,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={fontVars} suppressHydrationWarning>
+    <html lang="en" className={fontVars}>
       <head>
         <ThemeScript />
-        {/* A JS failure must never ship a blank page. */}
+        {/* A JS failure must never ship a blank page. Motion renders its
+            `initial` styles server-side, so every property an entrance starts
+            from has to be reset here — clip-path included, or the field-work
+            pills ship wiped to zero width. */}
         <noscript>
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
         </noscript>
       </head>
       <body>
         <MotionProvider>
-          <ThemeToggle />
+          <PageTerrain />
           <Reticle />
-          {children}
+          <SmoothScroll>{children}</SmoothScroll>
         </MotionProvider>
       </body>
     </html>

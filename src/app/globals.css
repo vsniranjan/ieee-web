@@ -1,31 +1,28 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* ---------------------------------------------------------------
-   Design tokens — field survey lane.
-   Complete light palette on :root. .dark redefines ONLY what changes.
-   Never define a colour for the first time inside .dark.
+   Design tokens. Single dark palette — there is no light theme.
+   The page is one continuous dark terrain from top to bottom.
    --------------------------------------------------------------- */
 
 :root {
-  --surface: oklch(0.985 0.003 110);
-  --raised: oklch(1 0 0);
-  --ink: oklch(0.2 0.012 110);
-  --ink-muted: oklch(0.43 0.015 110);
-  --primary: oklch(0.52 0.11 110);
-  --primary-deep: oklch(0.42 0.1 110);
-  --accent: oklch(0.45 0.09 62);
-  --hairline: oklch(0.2 0.012 110 / 0.14);
+  color-scheme: dark;
 
-  /* The hero plate holds its own world in both themes, so type colours on it
-     are fixed rather than theme-swapped. Both are lifted well clear of the
-     plate: at display sizes they only need 3:1, but outlined type reads
-     lighter than it measures, so these run brighter than that. */
-  --plate: oklch(0.22 0.02 110);
+  --plate: oklch(0.16 0.02 110);
+  --plate-raised: oklch(0.225 0.024 110);
   --on-plate: oklch(0.97 0.004 110);
   --plate-olive: oklch(0.76 0.15 110);
   --plate-bronze: oklch(0.74 0.12 62);
+
+  /* Drives the contour planes. */
+  --primary: oklch(0.72 0.13 110);
+
+  --terrain-wash: radial-gradient(
+    120% 80% at 78% 18%,
+    oklch(0.28 0.045 110) 0%,
+    oklch(0.2 0.028 110) 44%,
+    oklch(0.145 0.018 110) 100%
+  );
 
   --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-quick: 160ms;
@@ -33,30 +30,13 @@
   --dur-slow: 640ms;
 }
 
-.dark {
-  --surface: oklch(0.16 0.008 110);
-  --raised: oklch(0.205 0.008 110);
-  --ink: oklch(0.95 0.005 110);
-  --ink-muted: oklch(0.74 0.01 110);
-  --primary: oklch(0.72 0.13 110);
-  --primary-deep: oklch(0.8 0.13 110);
-  --accent: oklch(0.7 0.1 62);
-  --hairline: oklch(0.95 0.005 110 / 0.16);
-}
-
 @theme inline {
-  --color-surface: var(--surface);
-  --color-raised: var(--raised);
-  --color-ink: var(--ink);
-  --color-ink-muted: var(--ink-muted);
-  --color-primary: var(--primary);
-  --color-primary-deep: var(--primary-deep);
-  --color-accent: var(--accent);
-  --color-hairline: var(--hairline);
   --color-plate: var(--plate);
+  --color-plate-raised: var(--plate-raised);
   --color-on-plate: var(--on-plate);
   --color-plate-olive: var(--plate-olive);
   --color-plate-bronze: var(--plate-bronze);
+  --color-primary: var(--primary);
 
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
 
@@ -66,37 +46,92 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
+    background-color: var(--plate);
+    /* Sections enter slightly oversized, which would otherwise push a
+       horizontal scrollbar for the length of the animation. `clip` rather than
+       `hidden`: hidden turns this into a scroll container and breaks sticky
+       positioning further down the page. */
+    overflow-x: clip;
   }
 
   body {
-    background-color: var(--surface);
-    color: var(--ink);
+    /* The terrain runs the length of the page, so the plate is the page.
+       Nothing paints its own ground on top of this — a section-scoped
+       background is what produces a visible seam at the section edge. */
+    background-color: transparent;
+    color: var(--on-plate);
     font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
     font-variation-settings: "wdth" 100;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  /* Long words plus a large clamp is the classic overflow bug. Narrowing the
-     width axis on small screens buys the room instead of shrinking the type. */
-  .display {
-    font-variation-settings: "wdth" 78;
-    font-weight: 650;
-    letter-spacing: -0.025em;
-    line-height: 0.94;
-    text-wrap: balance;
+  /* The type scale. See DESIGN.md — every text element takes a role from here,
+     nothing renders in a default.
+
+     scaleY is the signature that makes Anton read as this site rather than as
+     Anton. A transform does not change the layout box, so each stretched role
+     raises its own line-height to compensate; change one, change the other. */
+
+  .t-title,
+  .t-subject,
+  .t-label {
+    font-family: var(--font-anton), Impact, sans-serif;
+    text-transform: uppercase;
+    transform-origin: bottom left;
   }
 
-  @media (min-width: 640px) {
-    .display {
-      font-variation-settings: "wdth" 100;
-    }
+  .t-title {
+    font-size: clamp(2rem, 6.5vw, 4rem);
+    letter-spacing: -0.01em;
+    line-height: 1.34;
+    transform: scaleY(1.24);
   }
 
-  @media (min-width: 1024px) {
-    .display {
-      font-variation-settings: "wdth" 118;
-    }
+  /* Sized against a full-width row. The rule that matters: a name larger than
+     its container reads as cramped, so this stays well inside the row rather
+     than filling it. */
+  .t-subject {
+    font-size: clamp(1.15rem, 2.6vw, 1.75rem);
+    letter-spacing: -0.005em;
+    line-height: 1.3;
+    transform: scaleY(1.18);
+  }
+
+  .t-label {
+    font-size: 0.8125rem;
+    letter-spacing: 0.14em;
+    line-height: 1.5;
+    transform: scaleY(1.12);
+    color: var(--plate-bronze);
+  }
+
+  /* Actions. Anton like every other short string — a semibold Archivo button
+     is the generic default this site is meant not to have. */
+  .t-action {
+    font-family: var(--font-anton), Impact, sans-serif;
+    text-transform: uppercase;
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+    letter-spacing: 0.09em;
+    line-height: 1;
+    transform: scaleY(1.14);
+    transform-origin: center;
+    display: inline-block;
+  }
+
+  /* Archivo is restricted to running paragraphs, never permitted elsewhere. */
+  .t-lede {
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .t-body {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    max-width: 68ch;
+    text-wrap: pretty;
+    color: color-mix(in oklch, var(--on-plate) 70%, transparent);
   }
 
   .prose-measure {
@@ -105,46 +140,117 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--plate-olive);
     outline-offset: 3px;
   }
 }
 
-/* Second headline row is outline-only, so the drifting contours read straight
-   through the letterforms. A transparent fill is invisible without text-stroke,
-   so the unsupported case falls back to a solid fill rather than nothing. */
-/* Contours are interrupted around the headline, as a topographic map breaks
-   its contours around a label. Lives on a static wrapper, never on the moving
-   layer, so the gap stays anchored to the text while lines slide through it.
-   The phone composition is four rows tall, so its hole is taller too. */
-.contour-halo {
-  --halo: radial-gradient(
-    88% 54% at 34% 72%,
-    transparent 0%,
-    transparent 34%,
-    rgba(0, 0, 0, 0.5) 62%,
-    black 92%
-  );
-  -webkit-mask-image: var(--halo);
-  mask-image: var(--halo);
+/* Disclosure via grid-template-rows 1fr -> 0fr. The collapsed state is applied
+   only under .js, so with JavaScript off every paragraph is simply open and
+   readable rather than clipped to nothing. One copy of the text, always in the
+   DOM, which is what a crawler and a screen reader both need. */
+.disclosure {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--dur-standard) var(--ease-signature);
 }
 
-@media (max-width: 639px) {
-  .contour-halo {
-    --halo: radial-gradient(
-      130% 42% at 44% 66%,
-      transparent 0%,
-      transparent 40%,
-      rgba(0, 0, 0, 0.5) 68%,
-      black 94%
-    );
-  }
+.disclosure > * {
+  min-height: 0;
+  overflow: hidden;
 }
 
+.js .disclosure[data-open="false"] {
+  grid-template-rows: 0fr;
+}
+
+/* A pill that becomes a panel. Only radius, colour and height change — the
+   width is constant, so there is no width animation to fight (fit-content to
+   100% cannot be transitioned) and no layout thrash. */
+.pill {
+  border-radius: 999px;
+  background-color: color-mix(in oklch, var(--plate-raised) 88%, transparent);
+  border: 1px solid color-mix(in oklch, var(--on-plate) 14%, transparent);
+  transition:
+    border-radius var(--dur-standard) var(--ease-signature),
+    border-color var(--dur-quick) linear,
+    background-color var(--dur-quick) linear,
+    transform var(--dur-quick) var(--ease-signature);
+}
+
+.pill:hover {
+  border-color: color-mix(in oklch, var(--plate-olive) 55%, transparent);
+  background-color: var(--plate-raised);
+}
+
+.js .pill[data-open="false"]:hover {
+  transform: translateY(-2px);
+}
+
+.pill[data-open="true"] {
+  border-radius: 28px;
+  background-color: var(--plate-raised);
+  border-color: color-mix(in oklch, var(--plate-olive) 40%, transparent);
+}
+
+/* The primary action, built as a survey label rather than a rounded pill.
+   A near-square corner deliberately opposes the fully rounded content rows:
+   rows are things to read, this is a thing to press, and they should not be
+   the same shape.
+
+   Hover fills from the left on a scaleX pseudo-element — the same rightward
+   wipe the field rows use to enter, so the action belongs to the same world.
+   Transform, not width, so nothing reflows. */
+.btn-field {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid color-mix(in oklch, var(--plate-olive) 55%, transparent);
+  color: var(--plate-olive);
+  transition:
+    color var(--dur-quick) var(--ease-signature),
+    border-color var(--dur-quick) var(--ease-signature);
+}
+
+.btn-field::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--plate-olive);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-standard) var(--ease-signature);
+}
+
+.btn-field:hover,
+.btn-field:focus-visible {
+  color: var(--plate);
+  border-color: var(--plate-olive);
+}
+
+.btn-field:hover::before,
+.btn-field:focus-visible::before {
+  transform: scaleX(1);
+}
+
+/* Leader line running out of the label, as on a plotted marker. */
+.btn-field .btn-tail {
+  transition: width var(--dur-standard) var(--ease-signature);
+  width: 1.25rem;
+}
+
+.btn-field:hover .btn-tail,
+.btn-field:focus-visible .btn-tail {
+  width: 2.25rem;
+}
+
+/* Outline type. The stroke is in em so it scales with the type and never thins
+   to a hairline on a phone. Transparent fill with no stroke support renders as
+   nothing at all, hence the solid fallback. */
 .word-outline {
   color: transparent;
-  /* em, not px: the stroke then scales with the type, so it stays proportional
-     on a phone instead of thinning to a hairline that vanishes in daylight. */
   -webkit-text-stroke: 0.028em var(--plate-olive);
   paint-order: stroke fill;
 }

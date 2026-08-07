@@ -49,7 +49,7 @@ function contour(
   return d.trim();
 }
 
-export function HeroStrata({
+export function Strata({
   count,
   from,
   to,
