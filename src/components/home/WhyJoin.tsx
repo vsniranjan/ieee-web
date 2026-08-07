@@ -31,7 +31,10 @@ export function WhyJoin() {
 
         <div className="relative mt-14 sm:mt-20">
           <Reveal>
-            <p className="font-[family-name:var(--font-anton)] text-[clamp(3rem,15vw,10rem)] leading-[0.95] tracking-[-0.02em] text-on-plate">
+            {/* The figure is the section's whole subject, so it takes the most
+                aggressive vw ramp on the page — a phone should not see it at
+                roughly the size of a heading. */}
+            <p className="font-[family-name:var(--font-anton)] text-[clamp(3.5rem,21vw,10rem)] leading-[0.95] tracking-[-0.02em] text-on-plate">
               <Counter to={whyJoin.stat.value} suffix={whyJoin.stat.suffix} />
             </p>
             <p className="t-label mt-3">
@@ -40,16 +43,25 @@ export function WhyJoin() {
           </Reveal>
         </div>
 
-        <ul className="mt-14 flex max-w-3xl flex-col gap-5 sm:mt-20 sm:gap-6">
-          {whyJoin.benefits.map((benefit, i) => (
-            <Reveal as="li" key={benefit} delay={i * 0.06}>
-              <span className="flex items-start gap-4">
-                <span aria-hidden className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-plate-bronze" />
-                <span className="t-lede text-on-plate">{benefit}</span>
-              </span>
-            </Reveal>
-          ))}
-        </ul>
+        {/* One bounded panel rather than three lines loose on the terrain.
+            Static — no icons, no expansion — so it reads as a different object
+            from the field-work rows rather than the same device twice. */}
+        <div className="panel mt-14 sm:mt-20">
+          <ul className="grid gap-9 p-6 sm:gap-8 sm:p-9 lg:grid-cols-3 lg:gap-10">
+            {whyJoin.benefits.map((benefit, i) => (
+              <Reveal as="li" key={benefit.keyword} delay={i * 0.06}>
+                <span
+                  aria-hidden
+                  className="block h-0.5 w-9 bg-plate-bronze"
+                />
+                <span className="t-subject mt-4 block text-on-plate">
+                  {benefit.keyword}
+                </span>
+                <span className="t-body mt-2 block">{benefit.detail}</span>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
 
         <Reveal className="mt-12">
           <Link

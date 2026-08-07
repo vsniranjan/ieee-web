@@ -1,11 +1,9 @@
 import type { FieldProject } from "@/content/home";
 
 /**
- * Compact glyphs for the collapsed tiles — the same drawn language as the
- * full FieldDiagram scenes, reduced to what survives at 40px.
- *
- * Separate from FieldDiagram on purpose: that is a 400x300 composition and it
- * turns to mud when shrunk. An icon is a different drawing, not a small one.
+ * Compact glyphs for the field-work rows, in the same drawn language as the
+ * page terrain. Drawn for this size specifically — a large composition scaled
+ * down turns to mud.
  */
 
 const PATHS: Record<FieldProject["figure"], string[]> = {

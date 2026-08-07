@@ -89,10 +89,15 @@ export const whyJoin = {
     label: "members",
     sub: "across 160 countries",
   },
+  /**
+   * Split in two so each takes the right type role. The keyword is short, so
+   * it is Anton; the detail is a running sentence, so it is Archivo. A plain
+   * body line for both was the generic default DESIGN.md exists to prevent.
+   */
   benefits: [
-    "Grants that put students on stage at international conferences.",
-    "A library of peer-reviewed courses, open to every member.",
-    "A seat at the table where global technical standards get written.",
+    { keyword: "Travel grants", detail: "Put students on stage at international conferences." },
+    { keyword: "eLearning library", detail: "Peer-reviewed courses, open to every member." },
+    { keyword: "Global standards", detail: "A seat at the table where they get written." },
   ],
   cta: {
     label: "Become a member",
@@ -106,6 +111,9 @@ export const whyJoin = {
  * so it cannot go stale the way CONTENT.md's hardcoded "38 years" did.
  */
 export const close = {
+  /** Hinge: everything above is IEEE at large, everything below is this branch. */
+  heading: { lead: "IEEE", tail: "MACE SB" },
+  reelHeading: { lead: "Our", tail: "events" },
   links: [
     { label: "The branch", href: "/about" },
     { label: "What we run", href: "/events" },

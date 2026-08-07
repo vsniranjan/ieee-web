@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
-import { FieldDiagram } from "@/components/home/FieldDiagram";
 import { FieldIcon } from "@/components/home/FieldIcon";
 import { MaskedLine } from "@/components/motion/MaskedLine";
 import { DUR, EASE_SIGNATURE } from "@/lib/motion";
@@ -140,20 +139,13 @@ function Tile({
 
       <div id={panelId} data-open={open} className="disclosure">
         <div>
-          <div className="grid gap-6 px-5 pb-6 sm:grid-cols-5 sm:gap-8 sm:px-6 sm:pb-8">
-            <motion.div className="sm:col-span-2" {...enter(0.04)}>
-              <FieldDiagram figure={project.figure} />
-            </motion.div>
-            {/* Inner panel grid is 5 columns and is independent of the tile
-                grid outside — this stays at sm. */}
-            <div className="sm:col-span-3">
-              <motion.p className="t-lede text-on-plate" {...enter(0.09)}>
-                {project.lede}
-              </motion.p>
-              <motion.p className="t-body mt-4" {...enter(0.14)}>
-                {project.full}
-              </motion.p>
-            </div>
+          <div className="px-5 pb-6 sm:px-6 sm:pb-8">
+            <motion.p className="t-lede max-w-2xl text-on-plate" {...enter(0.06)}>
+              {project.lede}
+            </motion.p>
+            <motion.p className="t-body mt-4" {...enter(0.12)}>
+              {project.full}
+            </motion.p>
           </div>
         </div>
       </div>
