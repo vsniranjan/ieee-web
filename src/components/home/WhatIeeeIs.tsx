@@ -73,7 +73,11 @@ export function WhatIeeeIs() {
           <p className="t-clause word-outline">{whatIeeeIs.stem}</p>
 
           {enhanced ? (
-            <div className="clause-slot mt-5">
+            <div className="clause-slot mt-[0.28em]">
+              {/* Gap in em, which inside .clause-slot resolves against the
+                  clause size, so it scales with the type rather than staying a
+                  fixed 1.25rem that is cavernous on desktop and cramped on a
+                  phone. */}
               {/* Invisible in-flow copy of the active clause. This is what
                   gives the box its height, so the box is always exactly tall
                   enough for every line of whatever is showing — and the ticks
@@ -107,7 +111,7 @@ export function WhatIeeeIs() {
               ))}
             </div>
           ) : (
-            <div className="mt-5 flex flex-col gap-6">
+            <div className="mt-[calc(var(--clause-size)*0.28)] flex flex-col gap-[calc(var(--clause-size)*0.45)]">
               {whatIeeeIs.clauses.map((clause) => (
                 <p key={clause} className="t-clause text-on-plate">
                   {clause}
@@ -119,11 +123,18 @@ export function WhatIeeeIs() {
           {enhanced && (
             // `layout` so the ticks glide to their new position as the slot
             // grows or shrinks with the active clause, rather than jumping.
-            <motion.div layout aria-hidden className="mt-10 flex gap-2">
+            <motion.div
+              layout
+              aria-hidden
+              // Offset and tick width both derive from the clause size. Fixed
+              // rem here left the ticks looking like leftovers beside type that
+              // had doubled on a phone.
+              className="mt-[calc(var(--clause-size)*0.5)] flex gap-[0.45rem]"
+            >
               {whatIeeeIs.clauses.map((clause, i) => (
                 <span
                   key={clause}
-                  className={`ease-signature h-px w-10 transition-colors duration-300 ${
+                  className={`ease-signature h-0.5 w-[calc(var(--clause-size)*0.62)] transition-colors duration-300 ${
                     i === active ? "bg-plate-bronze" : "bg-on-plate/20"
                   }`}
                 />

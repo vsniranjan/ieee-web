@@ -24,14 +24,27 @@ import { hero } from "@/content/home";
  */
 const STRETCH = 1.34;
 
+/**
+ * Font size lives on the WRAPPER, not on the row.
+ *
+ * MaskedLine's clipping mask pads itself in `em` to give the stretched glyphs
+ * and the outline stroke room above the line box. `em` there resolves against
+ * whatever the mask inherits — so with the size set on the row (the mask's
+ * child) the mask was computing its padding against 16px and reserving ~6px
+ * instead of ~35px. That is why the outline row kept clipping no matter how
+ * much the padding went up.
+ */
+const SIZE_MOBILE = "text-[clamp(2.9rem,17vw,5rem)]";
+const SIZE_WIDE = "text-[clamp(3rem,10vw,7rem)]";
+
 const ROW_BASE =
   "block origin-bottom-left font-[family-name:var(--font-anton)] tracking-[-0.005em]";
 
 /** Phone: four short rows, so the type can run much larger at a narrow width. */
-const ROW_MOBILE = `${ROW_BASE} text-[clamp(2.9rem,17vw,5rem)] leading-[1.52]`;
+const ROW_MOBILE = `${ROW_BASE} leading-[1.62]`;
 
 /** Wide: two long rows with room to breathe. */
-const ROW_WIDE = `${ROW_BASE} text-[clamp(3rem,10vw,7rem)] leading-[1.74]`;
+const ROW_WIDE = `${ROW_BASE} leading-[1.9]`;
 
 function HeadlineRow({
   row,
@@ -81,12 +94,12 @@ export function Hero() {
           {/* Visible rows are aria-hidden; the h1 carries the real sentence so
               assistive tech reads prose, not shouted fragments. */}
           <h1 aria-label={hero.headline} className="select-none">
-            <span aria-hidden className="block sm:hidden">
+            <span aria-hidden className={`block sm:hidden ${SIZE_MOBILE}`}>
               {hero.rowsMobile.map((row, i) => (
                 <HeadlineRow key={row.text} row={row} index={i} className={ROW_MOBILE} />
               ))}
             </span>
-            <span aria-hidden className="hidden sm:block">
+            <span aria-hidden className={`hidden sm:block ${SIZE_WIDE}`}>
               {hero.rowsWide.map((row, i) => (
                 <HeadlineRow key={row.text} row={row} index={i} className={ROW_WIDE} />
               ))}

@@ -20,7 +20,9 @@ export function WhyJoin() {
   return (
     <section className="relative">
       <div className="mx-auto w-full max-w-[88rem] px-5 pt-10 pb-20 sm:px-8 sm:pt-14 sm:pb-28">
-        <h2 className="t-title text-on-plate">
+        {/* One line. Flex lays the two masks side by side — they keep their
+            own `block` display, which flex items ignore for layout anyway. */}
+        <h2 className="t-title flex flex-wrap items-baseline gap-x-[0.28em] text-on-plate">
           <MaskedLine className="block">{whyJoin.heading.lead}</MaskedLine>
           <MaskedLine className="word-outline block" delay={0.08}>
             {whyJoin.heading.tail}

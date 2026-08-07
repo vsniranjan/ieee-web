@@ -26,8 +26,14 @@
 
   /* Declared once so the clause and the box that holds it share a font-size.
      `em` inside that box then resolves against the clause, not against the
-     16px it would otherwise inherit. */
-  --clause-size: clamp(1.75rem, 5.6vw, 5.25rem);
+     16px it would otherwise inherit.
+
+     The vw term is steep because this is the only thing on screen while the
+     section is pinned. At 5.6vw a phone fell straight through to the floor
+     value and rendered it at ~28px, which is body-copy size for something
+     meant to fill a viewport. At 12.5vw a 390px phone gets ~49px and the
+     ceiling still governs everything from tablet up. */
+  --clause-size: clamp(2.5rem, 12.5vw, 5.25rem);
 
   --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-quick: 160ms;
