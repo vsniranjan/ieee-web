@@ -83,13 +83,21 @@ export const whatIeeeIs = {
 export const whyJoin = {
   heading: { lead: "Why", tail: "join" },
   /** Verify against ieee.org before launch — flagged in the plan. */
-  stat: { value: 400000, suffix: "+", label: "members", sub: "across 160 countries" },
+  stat: {
+    value: 500000,
+    suffix: "+",
+    label: "members",
+    sub: "across 160 countries",
+  },
   benefits: [
     "Grants that put students on stage at international conferences.",
     "A library of peer-reviewed courses, open to every member.",
     "A seat at the table where global technical standards get written.",
   ],
-  cta: { label: "Become a member", href: "https://www.ieee.org/membership/join" },
+  cta: {
+    label: "Become a member",
+    href: "https://www.ieee.org/membership/join",
+  },
 };
 
 /**

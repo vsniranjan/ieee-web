@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Anton, Archivo } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { Footer } from "@/components/chrome/Footer";
+import { Navbar } from "@/components/chrome/Navbar";
 import { PageTerrain } from "@/components/chrome/PageTerrain";
 import { Reticle } from "@/components/chrome/Reticle";
 import { SmoothScroll } from "@/components/chrome/SmoothScroll";
@@ -56,7 +58,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <MotionProvider>
           <PageTerrain />
           <Reticle />
-          <SmoothScroll>{children}</SmoothScroll>
+          {/* Navbar and Footer live inside SmoothScroll so useLenis() can reach
+              the instance — for the menu's scroll lock and for back-to-top. */}
+          <SmoothScroll>
+            <Navbar />
+            {children}
+            <Footer />
+          </SmoothScroll>
         </MotionProvider>
       </body>
     </html>
