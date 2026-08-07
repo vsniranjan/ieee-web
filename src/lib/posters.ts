@@ -31,7 +31,7 @@ export const posters: Poster[] = [
   { src: "/gallery/women-leading-innovation.webp", width: 720, height: 900, title: "Women Leading Innovation for Sustainable Development", tag: "WIE · Panel Discussion" },
   { src: "/gallery/linkedin-industry-success.webp", width: 720, height: 720, title: "Engineering Your Professional Identity", tag: "IAS · Career Session" },
   { src: "/gallery/power-electronics-talk.webp", width: 720, height: 901, title: "The Technology Behind Modern Grid Systems", tag: "IE/PELS · Talk Session" },
-  { src: "/gallery/farewell-2026.webp", width: 720, height: 720, title: "Farewell — >.hack(); Team", tag: "Student Branch · Community" },
+  { src: "/gallery/farewell-2026.webp", width: 720, height: 720, title: "Farewell — >.hack()_; Team", tag: "Student Branch · Community" },
   { src: "/gallery/informatyka-agentic-ai.webp", width: 720, height: 900, title: "Beginner's Guide to Agentic AI & n8n", tag: "Informatyka 6.0 · Talk Session" },
   { src: "/gallery/understanding-gender-reality.webp", width: 720, height: 720, title: "Understanding Gender Reality", tag: "WIE · Awareness Session" },
   { src: "/gallery/distinguished-lecture-deep-learning.webp", width: 720, height: 900, title: "From Pixels to Decisions — Deep Learning", tag: "SPS · Distinguished Lecture" },

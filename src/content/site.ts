@@ -20,14 +20,16 @@ export const nav = {
 };
 
 /**
- * One repeating phrase, verbatim from CONTENT.md.
+ * One repeating phrase. Every event name here matches `events` in
+ * `content/events.ts`, which is where naming is settled.
  *
- * The event names here disagree with the ones in the field-work copy
- * (HACK-A-ADDICT vs Hack-a-addict, and Fauna Flash is absent). CONTENT.md
- * flags that drift; it needs settling once the events page exists.
+ * Two corrections against CONTENT.md's original string: `FAUNA FLASH` was
+ * missing entirely, and `STEM OUTREACH` was a third spelling of an event
+ * actually called STEM Initiative — School Outreach is its category tag, not
+ * its name.
  */
 export const ticker =
-  "ADVANCING TECHNOLOGY FOR HUMANITY · SINCE 1988 · >.HACK(); · SPARC · STEM OUTREACH · HACK-HER · HACK-A-ADDICT · LIGHT THE LIVES · CONNECT THE LIVES · ";
+  "ADVANCING TECHNOLOGY FOR HUMANITY · SINCE 1988 · >.HACK()_; · SPARC · STEM INITIATIVE · HACK-HER · HACK-A-ADDICT · LIGHT THE LIVES · CONNECT THE LIVES · FAUNA FLASH · ";
 
 /**
  * Where the branch can be reached. Single source — the footer's social column
@@ -89,7 +91,10 @@ export const footer = {
       // the navbar and the close section above.
       links: nav.links.filter((l) => l.href !== "/team"),
     },
-    { title: "Useful links", links: [{ label: "IEEE.org", href: "https://www.ieee.org" }] },
+    {
+      title: "Useful links",
+      links: [{ label: "IEEE.org", href: "https://www.ieee.org" }],
+    },
     // Reads the single source above, so the footer and the contact page can
     // never disagree about where the branch is online.
     { title: "Connect online", links: contact.socials },
