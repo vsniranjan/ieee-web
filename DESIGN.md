@@ -34,7 +34,8 @@ Every text element uses one of these. Defined once in `globals.css`, never inlin
 | Display | inline in `Hero.tsx` | Anton | `scaleY(1.34)`, clamp to 5.5rem, solid row + outline row |
 | Title | `.t-title` | Anton | uppercase, `scaleY(1.24)`, section headings |
 | Clause | `.t-clause` | Anton | uppercase, `scaleY(1.2)`, display scale — a statement that is the only thing on screen |
-| Subject | `.t-subject` | Anton | uppercase, `scaleY(1.18)`, item and card names |
+| Subject | `.t-subject` | Anton | uppercase, `scaleY(1.18)`, item and card names — sized against a **full-width row** |
+| Item | `.t-item` | Anton | uppercase, `scaleY(1.15)`, a name inside a **small container** — a plate in a grid |
 | Label | `.t-label` | Anton | uppercase, small, tracked, bronze — places, categories, meta |
 | Action | `.t-action` | Anton | uppercase, tracked, `scaleY(1.14)` — buttons and links |
 | Lede | `.t-lede` | Archivo | the one-line summary under a subject |

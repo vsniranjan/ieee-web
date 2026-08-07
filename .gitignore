@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Source rosters. Personal phone numbers, personal email addresses and
+# IEEE membership IDs for every committee member — deliberately kept off the
+# site, so they must not enter a public repo either. src/content/team.ts holds
+# the parts that are meant to be published.
+docs/

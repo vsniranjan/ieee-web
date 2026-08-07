@@ -140,10 +140,14 @@ function Tile({
       <div id={panelId} data-open={open} className="disclosure">
         <div>
           <div className="px-5 pb-6 sm:px-6 sm:pb-8">
-            <motion.p className="t-lede max-w-2xl text-on-plate" {...enter(0.06)}>
+            {/* `data-reveal` so the <noscript> reset reaches these. `enter`
+                uses `initial={false}`, which makes Motion render the closed
+                state server-side — without the hook, a JS failure ships both
+                paragraphs at opacity 0 inside an open disclosure. */}
+            <motion.p data-reveal className="t-lede max-w-2xl text-on-plate" {...enter(0.06)}>
               {project.lede}
             </motion.p>
-            <motion.p className="t-body mt-4" {...enter(0.12)}>
+            <motion.p data-reveal className="t-body mt-4" {...enter(0.12)}>
               {project.full}
             </motion.p>
           </div>
