@@ -24,6 +24,11 @@
     oklch(0.145 0.018 110) 100%
   );
 
+  /* Declared once so the clause and the box that holds it share a font-size.
+     `em` inside that box then resolves against the clause, not against the
+     16px it would otherwise inherit. */
+  --clause-size: clamp(1.75rem, 5.6vw, 5.25rem);
+
   --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-quick: 160ms;
   --dur-standard: 400ms;
@@ -106,6 +111,27 @@
     color: var(--plate-bronze);
   }
 
+  /* A clause of the self-rewriting sentence. Between title and subject: large
+     enough to be the only thing on screen, small enough that the longest of
+     the three still fits two lines in the slot they share. */
+  .t-clause {
+    font-family: var(--font-anton), Impact, sans-serif;
+    text-transform: uppercase;
+    /* This is the only thing on screen while the section is pinned, so it is
+       set at display scale. A ceiling near title size left it marooned in an
+       empty viewport on a wide monitor. */
+    font-size: var(--clause-size);
+    letter-spacing: -0.008em;
+    line-height: 1.24;
+    transform: scaleY(1.2);
+    transform-origin: bottom left;
+    /* The longest clause is 72 characters. At 22ch that is four lines, which
+       is what the shared slot is sized for — the clauses stack on top of each
+       other, so it must fit the worst case or the tallest one clips. */
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+
   /* Actions. Anton like every other short string — a semibold Archivo button
      is the generic default this site is meant not to have. */
   .t-action {
@@ -132,6 +158,16 @@
     max-width: 68ch;
     text-wrap: pretty;
     color: color-mix(in oklch, var(--on-plate) 70%, transparent);
+  }
+
+  /* Holds the stacked clauses. Carries the clause font-size so `em` units on
+     its children mean what they look like they mean. Its height comes from an
+     invisible in-flow copy of whichever clause is active, so the box is always
+     exactly tall enough for every line of that clause — never a fixed height
+     that clips the longer ones. */
+  .clause-slot {
+    position: relative;
+    font-size: var(--clause-size);
   }
 
   .prose-measure {

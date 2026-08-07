@@ -172,7 +172,7 @@ export function FieldWork() {
         if (e.key === "Escape" && openId) setOpenId(null);
       }}
     >
-      <div className="mx-auto w-full max-w-[88rem] px-5 py-20 sm:px-8 sm:py-28">
+      <div className="mx-auto w-full max-w-[88rem] px-5 pt-20 pb-10 sm:px-8 sm:pt-28 sm:pb-14">
         {/* Repeats the hero's solid-against-outline pairing, and its masked
             line rise. That pairing is the site's signature device. */}
         <h2 className="t-title text-on-plate">

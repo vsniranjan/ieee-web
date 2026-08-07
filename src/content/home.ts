@@ -64,3 +64,43 @@ export const fieldWork = {
     },
   ] satisfies FieldProject[],
 };
+
+/**
+ * Band 3. One sentence, three clauses — 135 words of CONTENT.md boilerplate
+ * cut to 35. The lengths are load-bearing: the clauses are set at display size
+ * and swap in the same slot, so one that runs long breaks the composition.
+ */
+export const whatIeeeIs = {
+  stem: "IEEE is",
+  clauses: [
+    "the body that writes the standards technology runs on.",
+    "a working commitment to advance technology for humanity.",
+    "why an engineer in Kothamangalam and one in Kyoto build to the same spec.",
+  ],
+};
+
+/** Band 4. The figure, then three benefits at one line each. */
+export const whyJoin = {
+  heading: { lead: "Why", tail: "join" },
+  /** Verify against ieee.org before launch — flagged in the plan. */
+  stat: { value: 400000, suffix: "+", label: "members", sub: "across 160 countries" },
+  benefits: [
+    "Grants that put students on stage at international conferences.",
+    "A library of peer-reviewed courses, open to every member.",
+    "A seat at the table where global technical standards get written.",
+  ],
+  cta: { label: "Become a member", href: "https://www.ieee.org/membership/join" },
+};
+
+/**
+ * Band 5. The span since the charter is drawn as a scale rather than written
+ * out — see Timeline. The year count is derived there from 1988, not stored,
+ * so it cannot go stale the way CONTENT.md's hardcoded "38 years" did.
+ */
+export const close = {
+  links: [
+    { label: "The branch", href: "/about" },
+    { label: "What we run", href: "/events" },
+    { label: "Who runs it", href: "/team" },
+  ],
+};

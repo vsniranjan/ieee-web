@@ -33,8 +33,10 @@ Every text element uses one of these. Defined once in `globals.css`, never inlin
 |---|---|---|---|
 | Display | inline in `Hero.tsx` | Anton | `scaleY(1.34)`, clamp to 5.5rem, solid row + outline row |
 | Title | `.t-title` | Anton | uppercase, `scaleY(1.24)`, section headings |
+| Clause | `.t-clause` | Anton | uppercase, `scaleY(1.2)`, display scale — a statement that is the only thing on screen |
 | Subject | `.t-subject` | Anton | uppercase, `scaleY(1.18)`, item and card names |
 | Label | `.t-label` | Anton | uppercase, small, tracked, bronze — places, categories, meta |
+| Action | `.t-action` | Anton | uppercase, tracked, `scaleY(1.14)` — buttons and links |
 | Lede | `.t-lede` | Archivo | the one-line summary under a subject |
 | Body | `.t-body` | Archivo | running paragraphs, measure capped 68ch |
 
@@ -57,8 +59,12 @@ Outline is `.word-outline` — `-webkit-text-stroke` in `em`, so the stroke scal
 never thins to a hairline on a phone. It has a solid-fill fallback under `@supports not`, because
 transparent fill with no stroke support renders as nothing at all.
 
-Use it at display and title size only. Outlined type is genuinely low-contrast; below title size it
-stops being readable outdoors.
+Use it at display, clause and title size only. Outlined type is genuinely low-contrast; below title
+size it stops being readable outdoors.
+
+The pair does not only split a title. On the self-rewriting sentence it splits the sentence itself:
+the stem `IEEE IS` outlined, the clause solid. Same device, applied to grammar rather than to a
+heading — which is also how the stem avoids becoming the banned eyebrow.
 
 ## Colour roles for type
 
