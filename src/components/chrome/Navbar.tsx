@@ -54,9 +54,25 @@ export function Navbar() {
         }`}
       >
         <div className="mx-auto flex w-full max-w-[88rem] items-center gap-6 px-5 py-4 sm:px-8">
-          <Link href="/" className="flex shrink-0 items-center gap-3">
-            <Image src={nav.brand.mark} alt="" width={32} height={32} className="size-8" priority />
-            <span className="t-action text-on-plate">{nav.brand.name}</span>
+          {/* The whole lockup, not the bird plus the branch name retyped in the
+              site's display face. The artwork is 2.45:1, so it is pinned by
+              height and left to find its own width.
+
+              Sized off the lockup's smallest line rather than off the bird: at
+              the 40px that matched the old mark, STUDENT BRANCH collapsed into
+              a smudge and the whole brand read lighter than the nav links
+              beside it. 72px is where that line resolves, and it also puts the
+              lockup at roughly the 200px width the old bird-plus-Anton block
+              occupied — which is the presence this is replacing. */}
+          <Link href="/" className="flex shrink-0 items-center">
+            <Image
+              src={nav.brand.full}
+              alt={nav.brand.name}
+              width={2449}
+              height={1000}
+              className="h-16 w-auto sm:h-18"
+              priority
+            />
           </Link>
 
           <nav aria-label="Primary" className="ml-auto hidden lg:block">
@@ -111,7 +127,8 @@ export function Navbar() {
         {menuOpen && (
           <motion.div
             id="mobile-menu"
-            className="fixed inset-0 z-40 flex flex-col justify-center bg-plate px-5 pt-24 pb-10 lg:hidden"
+            // pt clears the header, which grew with the lockup.
+            className="fixed inset-0 z-40 flex flex-col justify-center bg-plate px-5 pt-28 pb-10 lg:hidden"
             initial={reduced ? { opacity: 0 } : { opacity: 0, clipPath: "inset(0% 0% 100% 0%)" }}
             animate={reduced ? { opacity: 1 } : { opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
             exit={reduced ? { opacity: 0 } : { opacity: 0, clipPath: "inset(0% 0% 100% 0%)" }}

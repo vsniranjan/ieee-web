@@ -48,12 +48,19 @@ export function Footer() {
         <div className="relative z-10 mx-auto w-full max-w-[88rem] px-5 pt-12 pb-8 sm:px-8 sm:pt-20 sm:pb-10">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-5">
-              <Link href="/" className="flex items-center gap-3">
-                <Image src={nav.brand.mark} alt="" width={40} height={40} className="size-9 sm:size-10" />
-                <span>
-                  <span className="t-action block text-on-plate">{footer.wordmark}</span>
-                  <span className="t-label block">{footer.tagline}</span>
-                </span>
+              {/* The same lockup as the navbar, one size up because the footer
+                  is not fighting a nav row for the line. Nothing is set beside
+                  it: the artwork already reads IEEE MACE / STUDENT BRANCH, and
+                  the wordmark-plus-tagline pair that used to sit here said
+                  those exact words a second time. */}
+              <Link href="/" className="inline-flex">
+                <Image
+                  src={nav.brand.full}
+                  alt={nav.brand.name}
+                  width={2449}
+                  height={1000}
+                  className="h-16 w-auto sm:h-20"
+                />
               </Link>
             </div>
 

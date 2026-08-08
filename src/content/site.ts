@@ -9,7 +9,19 @@
  */
 
 export const nav = {
-  brand: { mark: "/logo.svg", name: "IEEE MACE SB" },
+  /**
+   * The official lockup — bird, IEEE MACE, and STUDENT BRANCH set in the
+   * branch's own blue. Navbar and footer both show it whole; neither pairs the
+   * bird with the branch name retyped in Anton, which is what they did before.
+   *
+   * `/logo.svg` is the bird alone and is still the favicon, wired directly in
+   * `app/layout.tsx` — there is no field for it here because nothing else
+   * needs to reach for it.
+   *
+   * `name` is the accessible name, never rendered as type beside the artwork:
+   * the lockup already says it, and a screen reader would hear it twice.
+   */
+  brand: { full: "/logo-full.svg", name: "IEEE MACE Student Branch" },
   links: [
     { label: "About Us", href: "/about" },
     { label: "Events", href: "/events" },
@@ -80,8 +92,9 @@ export const contact = {
 };
 
 export const footer = {
+  /** The oversized watermark behind the link columns. No longer doubles as the
+      brand line — that is the lockup now. */
   wordmark: "IEEE MACE SB",
-  tagline: "Student Branch",
   columns: [
     {
       title: "Pages",
