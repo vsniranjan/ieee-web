@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { DUR, EASE_SIGNATURE } from "@/lib/motion";
+import { formatPhone } from "@/content/team";
 import type { Member } from "@/content/team";
 
 /**
@@ -68,12 +69,26 @@ export function CoreCard({ member, index }: { member: Member; index: number }) {
         <span className="t-label mt-1 block">{member.role}</span>
         <span className="t-item mt-1 block text-on-plate">{member.name}</span>
 
+        {/* No rule above these, unlike the ExeCom plates: the photograph
+            already divides this card, and a second horizontal line inside a
+            caption column this narrow reads as clutter. */}
         {member.email ? (
           <a
             href={`mailto:${member.email}`}
-            className="ease-signature t-label mt-2 inline-block break-all text-on-plate/50 transition-colors duration-150 hover:text-plate-olive"
+            aria-label={`Email ${member.name}`}
+            className="ease-signature t-label mt-2 block break-all text-on-plate/50 transition-colors duration-150 hover:text-plate-olive"
           >
             {member.email}
+          </a>
+        ) : null}
+
+        {member.phone ? (
+          <a
+            href={`tel:${member.phone}`}
+            aria-label={`Call ${member.name}`}
+            className="ease-signature t-label mt-1 block text-on-plate/50 tabular-nums transition-colors duration-150 hover:text-plate-olive"
+          >
+            {formatPhone(member.phone)}
           </a>
         ) : null}
       </figcaption>

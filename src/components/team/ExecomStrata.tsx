@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { DUR, EASE_SIGNATURE } from "@/lib/motion";
-import { execom } from "@/content/team";
+import { execom, formatPhone } from "@/content/team";
 import type { ExecomGroup } from "@/content/team";
 
 /**
@@ -84,7 +84,7 @@ function Band({ group, index }: { group: ExecomGroup; index: number }) {
               <motion.li
                 key={member.name}
                 data-reveal
-                className="plate-card p-4 sm:p-5"
+                className="plate-card flex flex-col p-4 sm:p-5"
                 {...plateIn(i)}
               >
                 {/* Plotted marker, as on the field rows and the poster indices. */}
@@ -93,6 +93,34 @@ function Band({ group, index }: { group: ExecomGroup; index: number }) {
                 <span className="t-item mt-1 block text-on-plate">{member.name}</span>
                 {member.klass ? (
                   <span className="t-label mt-2 block text-on-plate/45">{member.klass}</span>
+                ) : null}
+
+                {/* Ruled off from the identity above it, so the card reads as a
+                    record with a footer rather than five stacked labels. The
+                    rule is pushed down by `mt-auto`: grid items stretch to the
+                    tallest card in the row, and without it a two-line role
+                    would leave its neighbour's contact block floating. */}
+                {member.email || member.phone ? (
+                  <span className="mt-auto block border-t border-on-plate/12 pt-3">
+                    {member.email ? (
+                      <a
+                        href={`mailto:${member.email}`}
+                        aria-label={`Email ${member.name}`}
+                        className="ease-signature t-label block break-all text-on-plate/50 transition-colors duration-150 hover:text-plate-olive"
+                      >
+                        {member.email}
+                      </a>
+                    ) : null}
+                    {member.phone ? (
+                      <a
+                        href={`tel:${member.phone}`}
+                        aria-label={`Call ${member.name}`}
+                        className="ease-signature t-label mt-1 block text-on-plate/50 tabular-nums transition-colors duration-150 hover:text-plate-olive"
+                      >
+                        {formatPhone(member.phone)}
+                      </a>
+                    ) : null}
+                  </span>
                 ) : null}
               </motion.li>
             ))}
