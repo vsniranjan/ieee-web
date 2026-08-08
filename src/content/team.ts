@@ -24,6 +24,15 @@
  *
  * This is the one field that goes stale on its own. It needs bumping again
  * each new term, or dropping.
+ *
+ * PORTRAITS are optional and seven ExeCom members have not sent one. A missing
+ * `photo` renders the empty hatched frame rather than dropping the frame, so a
+ * band stays on one grid whether or not everyone in it has been photographed.
+ *
+ * The ExeCom files are pre-cropped to the frame's 4:5 at 640x800; the six core
+ * portraits predate that and keep their own aspects, which `object-fit: cover`
+ * absorbs. Recrop with `scripts/portraits.ts` — the hand-tuned crop boxes for
+ * the loosely framed originals live in that file, not here.
  */
 
 export interface Photo {
@@ -150,6 +159,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 DS",
         email: "devadathanappu69@gmail.com",
         phone: "+916238463653",
+        photo: { src: "/team/devadathan-mr.webp", width: 640, height: 800 },
       },
       {
         name: "Niranjan V S",
@@ -157,6 +167,7 @@ export const execom: ExecomGroup[] = [
         klass: "S3 DSA",
         email: "mail.niranjanvs@gmail.com",
         phone: "+919448130521",
+        photo: { src: "/team/niranjan-v-s.webp", width: 640, height: 800 },
       },
       {
         name: "Josin Jojy",
@@ -164,6 +175,7 @@ export const execom: ExecomGroup[] = [
         klass: "S3 AI",
         email: "josinjojy1@gmail.com",
         phone: "+917012542699",
+        photo: { src: "/team/josin-jojy.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -177,6 +189,7 @@ export const execom: ExecomGroup[] = [
         klass: "S3 CS",
         email: "noelnommy@gmail.com",
         phone: "+917561099955",
+        photo: { src: "/team/noel-eldho-nommy.webp", width: 640, height: 800 },
       },
       {
         name: "Shyamjith CP",
@@ -200,6 +213,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 LA",
         email: "4221alphin@gmail.com",
         phone: "+919961511871",
+        photo: { src: "/team/alphin-philip.webp", width: 640, height: 800 },
       },
       {
         name: "Gouri S Prakash",
@@ -207,6 +221,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 LB",
         email: "gouriprakash42@gmail.com",
         phone: "+916238581463",
+        photo: { src: "/team/gouri-s-prakash.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -220,6 +235,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 LA",
         email: "navaneethasinoj@gmail.com",
         phone: "+919061060543",
+        photo: { src: "/team/navaneetha-sinoj.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -233,6 +249,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 CS",
         email: "mohammedaflaht99@ieee.org",
         phone: "+919142644807",
+        photo: { src: "/team/mohammed-aflah-t.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -279,6 +296,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 EB",
         email: "adithyakrishna027@gmail.com",
         phone: "+919656984266",
+        photo: { src: "/team/adithya-krishna.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -292,6 +310,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 EB",
         email: "nssooraj77@gmail.com",
         phone: "+918304811633",
+        photo: { src: "/team/sooraj-n-s.webp", width: 640, height: 800 },
       },
       {
         name: "Meritta Elizabeth S",
@@ -299,6 +318,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 LA",
         email: "merittaelizabeth02@gmail.com",
         phone: "+919544869455",
+        photo: { src: "/team/meritta-elizabeth-s.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -312,6 +332,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 LB",
         email: "kalyanib@ieee.org",
         phone: "+917025592234",
+        photo: { src: "/team/kalyani-b.webp", width: 640, height: 800 },
       },
       {
         name: "Sivapriya P H",
@@ -320,6 +341,7 @@ export const execom: ExecomGroup[] = [
         // The one college address on the roster. Left as listed.
         email: "b24ec105@mace.ac.in",
         phone: "+918848783282",
+        photo: { src: "/team/sivapriya-p-h.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -333,6 +355,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 AI",
         email: "adwaithtm06@gmail.com",
         phone: "+919447534755",
+        photo: { src: "/team/adwaith-t-m.webp", width: 640, height: 800 },
       },
       {
         name: "Hridhya Elizabeth",
@@ -340,6 +363,7 @@ export const execom: ExecomGroup[] = [
         klass: "S3 LB",
         email: "elizabethhridhya@gmail.com",
         phone: "+916282398770",
+        photo: { src: "/team/hridhya-elizabeth.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -353,6 +377,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 DS",
         email: "deeyasaju28@gmail.com",
         phone: "+919496177329",
+        photo: { src: "/team/deeya-saju.webp", width: 640, height: 800 },
       },
       {
         name: "Abhishek C S",
@@ -360,6 +385,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 LA",
         email: "abhishekcs892@gmail.com",
         phone: "+916238354892",
+        photo: { src: "/team/abhishek-c-s.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -373,6 +399,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 LB",
         email: "gaumichandra2006@gmail.com",
         phone: "+919037591127",
+        photo: { src: "/team/gauthami-c.webp", width: 640, height: 800 },
       },
       {
         name: "Jinta Maria Joby",
@@ -380,6 +407,7 @@ export const execom: ExecomGroup[] = [
         klass: "S3 DSB",
         email: "jintamariyajoby@gmail.com",
         phone: "+917902978504",
+        photo: { src: "/team/jinta-maria-joby.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -393,6 +421,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 LB",
         email: "alwafaziyad@gmail.com",
         phone: "+919207458276",
+        photo: { src: "/team/alwafa-ziyad.webp", width: 640, height: 800 },
       },
       {
         name: "Shreya Zubin Nair",
@@ -402,6 +431,7 @@ export const execom: ExecomGroup[] = [
         klass: "S3 DS",
         email: "shreyazubin7@gmail.com",
         phone: "+917902271818",
+        photo: { src: "/team/shreya-zubin-nair.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -415,6 +445,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 DS",
         email: "shifausman198961@ieee.org",
         phone: "+919074331981",
+        photo: { src: "/team/shifa-usman.webp", width: 640, height: 800 },
       },
       {
         name: "Alna Biju Gregory",
@@ -422,6 +453,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 CS",
         email: "alnabiju0@gmail.com",
         phone: "+917907654173",
+        photo: { src: "/team/alna-biju-gregory.webp", width: 640, height: 800 },
       },
     ],
   },
@@ -442,6 +474,7 @@ export const execom: ExecomGroup[] = [
         klass: "S5 LB",
         email: "georgeoffacts6@gmail.com",
         phone: "+917306556875",
+        photo: { src: "/team/george-sunibabu.webp", width: 640, height: 800 },
       },
     ],
   },

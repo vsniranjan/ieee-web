@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { Reveal } from "@/components/motion/Reveal";
@@ -20,6 +21,11 @@ import type { ExecomGroup } from "@/content/team";
  * The panels use the shared `.disclosure` rule, which only collapses under
  * `.js`. A JavaScript failure therefore ships all seventeen bands open and
  * every one of the 31 names readable — which is the whole point of a roster.
+ *
+ * Portraits sit inside the closed bands, so sixteen of the seventeen never
+ * request an image until someone opens them. `next/image` is lazy by default
+ * and the collapsed panel has no layout box, which is what keeps a roster of
+ * 31 faces off the initial load.
  */
 
 function Band({ group, index }: { group: ExecomGroup; index: number }) {
@@ -87,13 +93,42 @@ function Band({ group, index }: { group: ExecomGroup; index: number }) {
                 className="plate-card flex flex-col p-4 sm:p-5"
                 {...plateIn(i)}
               >
-                {/* Plotted marker, as on the field rows and the poster indices. */}
-                <span aria-hidden className="block size-1.5 rounded-full bg-plate-olive" />
-                <span className="t-label mt-3 block">{member.role}</span>
-                <span className="t-item mt-1 block text-on-plate">{member.name}</span>
-                {member.klass ? (
-                  <span className="t-label mt-2 block text-on-plate/45">{member.klass}</span>
-                ) : null}
+                {/* Portrait beside the name, at the same reading order as the
+                    core cards but a size down — these run three to a row and a
+                    core-sized thumbnail would turn the band into a face grid.
+
+                    The frame is drawn whether or not a photograph exists for
+                    it. Seven of the 31 have not sent one, and dropping the
+                    frame on those would hang their text off a different left
+                    edge from the plate beside it; the empty hatch reads as a
+                    plate reserved, which is what it is. */}
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="portrait-frame w-16 shrink-0 sm:w-20">
+                    {member.photo ? (
+                      <Image
+                        src={member.photo.src}
+                        width={member.photo.width}
+                        height={member.photo.height}
+                        alt={`${member.name}, ${member.role}`}
+                        // Quoted at 2x the 4–5rem slot, as on the core cards, so
+                        // a dense screen lands on 256w instead of upscaling the
+                        // 128w candidate.
+                        sizes="(min-width: 640px) 10rem, 8rem"
+                        quality={90}
+                      />
+                    ) : null}
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    {/* Plotted marker, as on the field rows and the poster indices. */}
+                    <span aria-hidden className="block size-1.5 rounded-full bg-plate-olive" />
+                    <span className="t-label mt-3 block">{member.role}</span>
+                    <span className="t-item mt-1 block text-on-plate">{member.name}</span>
+                    {member.klass ? (
+                      <span className="t-label mt-2 block text-on-plate/45">{member.klass}</span>
+                    ) : null}
+                  </div>
+                </div>
 
                 {/* Ruled off from the identity above it, so the card reads as a
                     record with a footer rather than five stacked labels. The
