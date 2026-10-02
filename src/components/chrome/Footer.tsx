@@ -40,7 +40,7 @@ export function Footer() {
             read as noise behind the links rather than as a mark. */}
         <p
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-1/2 z-0 hidden -translate-y-1/2 text-center font-[family-name:var(--font-anton)] text-[19vw] leading-[0.8] tracking-[-0.02em] text-on-plate/[0.06] select-none sm:block"
+          className="pointer-events-none absolute inset-x-0 top-1/2 z-0 hidden -translate-y-1/2 text-center text-[12vw] leading-[0.8] font-semibold tracking-[-0.04em] text-on-plate/[0.06] select-none sm:block"
         >
           {footer.wordmark}
         </p>

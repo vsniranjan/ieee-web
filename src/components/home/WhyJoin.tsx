@@ -34,7 +34,7 @@ export function WhyJoin() {
             {/* The figure is the section's whole subject, so it takes the most
                 aggressive vw ramp on the page — a phone should not see it at
                 roughly the size of a heading. */}
-            <p className="font-[family-name:var(--font-anton)] text-[clamp(3.5rem,21vw,10rem)] leading-[0.95] tracking-[-0.02em] text-on-plate">
+            <p className="text-[clamp(3.5rem,16vw,7.5rem)] leading-none font-semibold tracking-[-0.04em] tabular-nums text-on-plate">
               <Counter to={whyJoin.stat.value} suffix={whyJoin.stat.suffix} />
             </p>
             <p className="t-label mt-3">

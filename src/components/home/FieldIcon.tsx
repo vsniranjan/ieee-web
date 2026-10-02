@@ -6,7 +6,7 @@ import type { FieldProject } from "@/content/home";
  * down turns to mud.
  */
 
-const PATHS: Record<FieldProject["figure"], string[]> = {
+export const PATHS: Record<FieldProject["figure"], string[]> = {
   // Sun over a ridge: the two solar systems, and the ground they sit on.
   solar: [
     "M4 27 C 9 24, 13 28, 18 25 S 27 22, 32 25",

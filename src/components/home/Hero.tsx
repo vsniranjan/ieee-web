@@ -4,25 +4,16 @@ import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { MaskedLine } from "@/components/motion/MaskedLine";
+import { ParallaxHero } from "@/components/ui/wilderness";
 import { DUR, EASE_SIGNATURE } from "@/lib/motion";
 import { hero } from "@/content/home";
 
 /**
- * Hero: headline and one CTA.
+ * Hero: headline, one CTA, and one photo split into two soft depth planes.
  *
- * The terrain behind it belongs to the page, not to this section — see
- * PageTerrain. All this owns is the type and its entrance.
+ * The continuous terrain still belongs to the page — see PageTerrain. This
+ * section feathers the branch group photo back into that shared ground.
  */
-
-/**
- * Glyphs are stretched taller than Anton draws them via scaleY. That has to go
- * through Motion's transform rather than a CSS class — Motion writes transform
- * inline for the entrance, and inline beats the class, wiping the scale.
- *
- * A transform does not change layout height, so leading is raised to match;
- * otherwise the taller rows eat the gap and collide.
- */
-const STRETCH = 1.34;
 
 /**
  * Font size lives on the WRAPPER, not on the row.
@@ -34,17 +25,16 @@ const STRETCH = 1.34;
  * instead of ~35px. That is why the outline row kept clipping no matter how
  * much the padding went up.
  */
-const SIZE_MOBILE = "text-[clamp(2.9rem,17vw,5rem)]";
-const SIZE_WIDE = "text-[clamp(3rem,10vw,7rem)]";
+const SIZE_MOBILE = "text-[clamp(2.5rem,12vw,4rem)]";
+const SIZE_WIDE = "text-[clamp(3rem,6.5vw,5.5rem)]";
 
-const ROW_BASE =
-  "block origin-bottom-left font-[family-name:var(--font-anton)] tracking-[-0.005em]";
+const ROW_BASE = "block font-semibold tracking-[-0.035em]";
 
 /** Phone: four short rows, so the type can run much larger at a narrow width. */
-const ROW_MOBILE = `${ROW_BASE} leading-[1.62]`;
+const ROW_MOBILE = `${ROW_BASE} leading-[1.15]`;
 
 /** Wide: two long rows with room to breathe. */
-const ROW_WIDE = `${ROW_BASE} leading-[1.9]`;
+const ROW_WIDE = `${ROW_BASE} leading-[1.12]`;
 
 function HeadlineRow({
   row,
@@ -58,7 +48,6 @@ function HeadlineRow({
   return (
     <MaskedLine
       on="load"
-      scaleY={STRETCH}
       // Four rows on mobile still has to land inside the 500ms stagger budget.
       delay={0.06 + index * 0.08}
       className={`${className} ${row.outline ? "word-outline" : "text-on-plate"}`}
@@ -83,13 +72,15 @@ export function Hero() {
       ref={section}
       className="relative flex min-h-[100svh] flex-col justify-center"
     >
-      {/* No background of its own, and no scrim. Anything painted inside this
-          box stops at the box, which is exactly what produced a hard cut where
-          the hero met the band below. The page is one continuous terrain.
+      <ParallaxHero />
+
+      {/* No background or scrim on the copy wrapper. The image plane above is
+          masked to transparency, so the page remains one continuous terrain
+          instead of ending at a section-coloured rectangle.
 
           Vertically centred and inset from the left edge on wide screens, so
           the block sits in the frame rather than along its bottom rail. */}
-      <div className="relative w-full px-5 py-16 sm:px-8 sm:py-20 lg:pl-[9vw]">
+      <div className="relative z-10 w-full px-5 py-16 sm:px-8 sm:py-20 lg:pl-[9vw]">
         <motion.div style={reduced ? undefined : { y: copyDrift }}>
           {/* Visible rows are aria-hidden; the h1 carries the real sentence so
               assistive tech reads prose, not shouted fragments. */}

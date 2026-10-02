@@ -9,14 +9,14 @@ export const hero = {
    * version, where the long rows have room to breathe.
    */
   rowsMobile: [
-    { text: "EMPOWERING", outline: false },
-    { text: "INNOVATION", outline: false },
-    { text: "SHAPING", outline: true },
-    { text: "TOMORROW.", outline: true },
+    { text: "Empowering", outline: false },
+    { text: "innovation,", outline: false },
+    { text: "shaping", outline: true },
+    { text: "tomorrow.", outline: true },
   ],
   rowsWide: [
-    { text: "EMPOWERING INNOVATION", outline: false },
-    { text: "SHAPING TOMORROW.", outline: true },
+    { text: "Empowering innovation,", outline: false },
+    { text: "shaping tomorrow.", outline: true },
   ],
   cta: { label: "Join Us Today", href: "https://www.ieee.org" },
 };

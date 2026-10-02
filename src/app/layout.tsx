@@ -1,38 +1,23 @@
 import type { Metadata } from "next";
-import { Anton, Archivo } from "next/font/google";
+import { Inter } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { Footer } from "@/components/chrome/Footer";
 import { Navbar } from "@/components/chrome/Navbar";
 import { PageTerrain } from "@/components/chrome/PageTerrain";
-import { Reticle } from "@/components/chrome/Reticle";
 import { SmoothScroll } from "@/components/chrome/SmoothScroll";
 import { ThemeScript } from "@/components/chrome/ThemeScript";
 import "./globals.css";
 
 /**
- * One family, two axes. Archivo carries display and body through weight and
- * width contrast, which beats a timid display+body pair.
+ * One family for everything. Headings and body differ by size and weight only.
  */
-const archivo = Archivo({
+const inter = Inter({
   subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-archivo",
+  variable: "--font-inter",
   display: "swap",
 });
 
-/**
- * Anton: the single display face. Ultra-condensed, one weight, poster-cut —
- * distinctive enough on its letterforms alone that the hero composition can
- * stay plain. Latin subset, ~9KB.
- */
-const anton = Anton({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-anton",
-  display: "swap",
-});
-
-const fontVars = [archivo.variable, anton.variable].join(" ");
+const fontVars = inter.variable;
 
 export const metadata: Metadata = {
   title: "IEEE MACE SB",
@@ -57,7 +42,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <MotionProvider>
           <PageTerrain />
-          <Reticle />
           {/* Navbar and Footer live inside SmoothScroll so useLenis() can reach
               the instance — for the menu's scroll lock and for back-to-top. */}
           <SmoothScroll>

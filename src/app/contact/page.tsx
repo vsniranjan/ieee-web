@@ -59,8 +59,6 @@ export default function ContactPage() {
                 >
                   <span className="min-w-0 flex-1">
                     <span className="t-label block">{channel.label}</span>
-                    {/* Anton uppercases it, which an address survives — mail
-                        and tel are both case-insensitive. */}
                     <span className="ease-signature t-subject mt-1 block break-all text-on-plate transition-colors duration-150 group-hover:text-plate-olive">
                       {channel.value}
                     </span>

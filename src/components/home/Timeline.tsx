@@ -65,14 +65,14 @@ export function Timeline() {
         {mounted ? (
           <motion.span
             aria-hidden
-            className="font-[family-name:var(--font-anton)] text-[clamp(3rem,11vw,7rem)] leading-[0.9] tracking-[-0.02em] text-on-plate"
+            className="text-[clamp(3rem,9vw,5.5rem)] leading-none font-semibold tracking-[-0.04em] tabular-nums text-on-plate"
           >
             {count}
           </motion.span>
         ) : (
           <span
             aria-hidden
-            className="font-[family-name:var(--font-anton)] text-[clamp(3rem,11vw,7rem)] leading-[0.9] tracking-[-0.02em] text-on-plate"
+            className="text-[clamp(3rem,9vw,5.5rem)] leading-none font-semibold tracking-[-0.04em] tabular-nums text-on-plate"
           >
             {years}
           </span>
