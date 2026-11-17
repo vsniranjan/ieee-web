@@ -106,7 +106,10 @@ export const footer = {
     },
     {
       title: "Useful links",
-      links: [{ label: "IEEE.org", href: "https://www.ieee.org" }],
+      links: [
+        { label: "IEEE", href: "https://www.ieee.org" },
+        { label: "IAS MACE", href: "https://www.ias.ieeemace.org" },
+      ],
     },
     // Reads the single source above, so the footer and the contact page can
     // never disagree about where the branch is online.
