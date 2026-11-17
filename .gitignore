@@ -45,7 +45,7 @@ next-env.d.ts
 # site, so they must not enter a public repo either. src/content/team.ts holds
 # the parts that are meant to be published.
 docs/
-
+.vscode/
 # Portrait originals as the members sent them: 48MB of full-resolution personal
 # photographs, four of them carrying GPS coordinates in EXIF. Same rule as
 # docs/. public/team/ holds the cropped, EXIF-stripped derivatives that ship,
